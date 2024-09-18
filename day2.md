@@ -35,7 +35,12 @@ echo "sshkey" >>var/www/.ssh/authorized_keys
 then cat the file
 cat var/www/.ssh/authorized_keys
 
-#directory traversal
+## directory traversal
 
 ../../../../../../../../../../../../etc/password in the url or the radio button
 assu,ing its not im ho,e directory and is running cat
+
+## web example
+## cross
+<script>alert('XSS!');</script>
+
