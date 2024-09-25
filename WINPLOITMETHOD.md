@@ -1,8 +1,8 @@
 # scheme of manuever
 LINOPS                                      
-  -> JUMP                                                   
-    -> GREYSITE
-      -> T3 192.168.150.245
+-> JUMP                                                   
+-> GREYSITE
+-> T3 192.168.150.245
       
 # opnotes: all commands are ran on the linops
 ssh -MS /tmp/jump student@10.50.39.53 ## PassW:EM5UCDd0t5NrkXb ##       -> gets on jump
